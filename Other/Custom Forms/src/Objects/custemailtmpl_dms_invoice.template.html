@@ -1,0 +1,117 @@
+<html><body>
+<style type="text/css">thead.clientinfo{
+            background-color: #3498db;
+            color: #FFFFFF;
+            padding: 0px 6px;
+        }
+        tbody.clientinfo{
+            color: #000000;
+            padding: 0px 6px;
+            line-height: 16pt;
+        }
+        .bolded{
+            font-weight: bold;
+        }
+        td.inner-margin{
+            width: 10%;
+        }
+        td.inner-table{
+            margin: auto;
+            vertical-align: top;
+        }
+        td.inner-table table{
+            border-collapse: collapse;
+        }
+        td.inner-table table tbody tr td{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .center-content {
+            width: 600px;
+        }
+</style>
+<table cellpadding="10px" cellspacing="0" style="width:100%;">
+<tbody>
+	<tr>
+	<td style="width: 79px;"><span>&nbsp;</span></td>
+	<td class="center-content" style="width: 790px;">
+	<p>Dear ${transaction.entity.parent}:<br />
+	<br />
+	<br />
+	Please find Invoice #${transaction.tranid} attached. ${transaction.total} is due for payment on ${transaction.dueDate}. You may find remittance information below or on the attached invoice.<br />
+	<br />
+	<br />
+	Thank you for your business - we appreciate it very much.<br />
+	<br />
+	<br />
+	Sincerely,<br />
+	<br />
+	Digital Media Solutions<br />
+	&nbsp;</p>
+	</td>
+	<td style="width: 71px;"><span>&nbsp;</span></td>
+	</tr>
+	<tr>
+	<td style="width: 79px;"><span>&nbsp;</span></td>
+	<td class="center-content" style="width: 790px;">
+	<table style="width: 655px;">
+	<tbody>
+		<tr>
+		<td class="inner-table" style="width: 278px;">
+		<table>
+		<thead class="clientinfo">
+			<tr>
+			<th colspan="2">Electronic Remittance Information</th>
+			</tr>
+		</thead>
+		<tbody class="clientinfo">
+			<tr>
+			<td class="bolded">Recipient</td>
+			<td><#if transaction.department.custrecord_sr_div_bank_name?has_content>${transaction.department.custrecord_sr_div_bank_name}<#else>DMS Digital Agency</#if></td>
+			</tr>
+			<tr>
+			<td class="bolded">Account Number</td>
+			<td><#if transaction.department.custrecord_sr_div_bank_acct_num?has_content>${transaction.department.custrecord_sr_div_bank_acct_num}<#else>4464585561</#if></td>
+			</tr>
+			<tr>
+			<td class="bolded">Recipient Bank</td>
+			<td>Wells Fargo Bank</td>
+			</tr>
+			<tr>
+			<td class="bolded">Wire/ACH RTA</td>
+			<td>121000248</td>
+			</tr>
+			<tr>
+			<td class="bolded">Swift Code</td>
+			<td>WFBIUS6S</td>
+			</tr>
+		</tbody>
+		</table>
+		</td>
+		<td class="inner-margin" style="width: 30px;"><span>&nbsp;</span></td>
+		<td class="inner-table" style="width: 325px;">
+		<table>
+		<thead class="clientinfo">
+			<tr>
+			<th>Check Remittance Information</th>
+			</tr>
+		</thead>
+		<tbody class="clientinfo">
+			<tr>
+			<td><span class="bolded">Remit To: </span>${companyInformation.companyName}</td>
+			</tr>
+			<tr>
+			<td>${transaction.custbody_subsidiary_mainaddress}</td>
+			</tr>
+		</tbody>
+		</table>
+		</td>
+		</tr>
+	</tbody>
+	</table>
+	</td>
+	<td style="width: 71px;"><span>&nbsp;</span></td>
+	</tr>
+</tbody>
+</table>
+</body></html>

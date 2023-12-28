@@ -1,0 +1,265 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<!-- Built with Freemarker 3.2.26-->
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+    <macro id="nlheader"> <!--Header-->
+    <table class="header" style="width: 100%; height:200px; margin-top: -60px">
+        <tr>
+          <td style="width:187px;height:153px;">
+            <#if record.department.custrecord_sr_div_form_logo?has_content>
+                    <img src="${record.department.custrecord_sr_div_form_logo}" style="width:187px;height:153px; " /> 
+            <#else>
+                <#if companyInformation.logoUrl?length != 0>
+                    <img src="${companyInformation.logoUrl}" style="width:187px;height:153px; " /> 
+                </#if>
+            </#if>
+          </td>
+          <td style="line-height:10pt" align="right">
+                <table style="padding-top: 60px">
+                    <#if record.department.custrecord_dms_dba_header?has_content><tr><td class="nameandaddress" style="font-size:8pt"><span>${record.department.custrecord_dms_dba_header}</span></td></tr></#if>
+                    <tr><td class="nameandaddress" style="font-size:8pt"><span>${subsidiary.mainaddress_text}</span></td></tr>
+                </table>
+          </td>
+      	</tr>
+    </table>
+    </macro><!--END Header-->
+        <macro id="nlfooter">
+          	<table style='width:550px; padding-top:25px; margin-bottom:10px'>
+                <tr>
+                    <td colspan='5'>
+                    <table class='clientinfo box' style="width:250px">
+                        <tr><th>Electronic Remittance Information</th></tr>
+                        <tr><td>Recipient: <#if record.department.custrecord_sr_div_bank_name?has_content>${record.department.custrecord_sr_div_bank_name}</#if></td></tr>
+                        <tr><td>Account Number: <#if record.department.custrecord_sr_div_bank_acct_num?has_content>${record.department.custrecord_sr_div_bank_acct_num}</#if></td></tr>
+                        <tr><td>Recipient Bank: <#if record.department.custrecord_sr_div_bank?has_content>${record.department.custrecord_sr_div_bank}</#if></td></tr>
+                        <tr><td>Wire/ACH RTA: <#if record.department.custrecord_sr_div_bank_wireachrta?has_content>${record.department.custrecord_sr_div_bank_wireachrta}</#if></td></tr>
+                        <tr><td>Swift Code: <#if record.department.custrecord_sr_div_swiftcode?has_content>${record.department.custrecord_sr_div_swiftcode}</#if></td></tr>
+                    </table>
+                    </td>
+                    <td colspan='5'>
+                        <table class='clientinfo box' style="width:250px; margin-left:10px">
+                            <tr><th>Check Remittance Information</th></tr>
+                            <tr><td>Remit To: ${companyInformation.companyName}</td></tr>
+                            <tr><td>${subsidiary.mainaddress_text}</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table class="footer" valign="bottom" style="width: 100%;  margin-left:0px; margin-right:0px; line-height: 10pt">
+            <tr>
+              	<td width="80%" align="left" valign="bottom" style="margin-left:0.1in;"><span style="font-size:10px;font-weight:700;color:#000000;">(877) 423-1366</span></td>
+			</tr>
+            <tr>
+              	<td width="80%" align="left" valign="bottom" style="margin-left:0.1in;"><span style="font-size:10px;font-weight:700;color:#000000;">digitalmediasolutions.com</span></td>
+              	<td width="20%" align="right" valign="bottom"><pagenumber/> of <totalpages/></td>
+			</tr>
+          </table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #2575AE;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 2px;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0px;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            background-color: #C5CFD7;
+        }
+        table.clientinfo {
+            line-height: 16pt;
+        }
+      	table.box {
+        	border: 1px solid black;
+      	}
+        table.clientinfo th{
+            color: #FFFFFF;
+            padding: 0px 6px;
+        }
+        table.clientinfo td{
+            color: #000000;
+            padding: 0px 6px;
+            line-height: 18pt;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            line-height: 200%;
+        }
+        td.totalbox {
+            background-color: #C5CFD7;
+            line-height: 200%;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0px;
+        }
+        td.nameandaddress {
+            padding: 0px 6px;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="160pt" padding="0.5in 0.5in 0.2in 0.5in" size="Letter">
+    <table style="width: 100%; line-height: 14pt; margin-top: 60px;">
+        <tr>
+          	<td>
+              <table class='clientinfo' style="width:250px;">
+                  <tr><th>Client Information</th></tr>
+                  <tr><td>${record.billaddress}</td></tr>
+                  <tr><td><#if record.entity.email?length != 0> ${record.entity.email}</#if></td></tr>
+                  <tr><td>&nbsp;</td></tr>
+                  <tr><td><#if record.salesrep?has_content> <span style='font-weight:bold'>Sales Rep: </span>${record.salesrep}</#if></td></tr>
+              </table>
+        	</td>
+            <td style='line-height:8pt' align="right" vertical-align="baseline">
+            <table>
+                <tr><td><span style='font-weight:bold'>Invoice Number&nbsp;&nbsp;</span></td>
+                    <td><span>${record.tranid}</span></td></tr>
+                <tr><td><span style='font-weight:bold'>Invoice Date</span></td>
+                    <td><span>${record.trandate}</span></td></tr>
+                <tr><td><span style='font-weight:bold'>Net Terms</span></td>
+                    <td><span>${record.terms}</span></td></tr>
+                <tr><td><span style='font-weight:bold'>Due Date</span></td>
+                    <td><span>${record.duedate}</span></td></tr>
+                <tr><td><span style='font-weight:bold'>P.O. No.</span></td>
+                    <td><span>${record.otherrefnum}</span></td></tr>
+            </table>
+            </td>
+        </tr>
+    </table>
+<#if record.item?has_content>
+<table class="itemtable" style="width: 100%; margin-top: 30px;">
+<!-- start items -->
+<#list record.item as item><#if item_index==0>
+<thead>
+	<tr>
+	<!-- <th colspan="9">Campaign Name</th> -->
+	<!--<th colspan="11">${item.item@label}</th>-->
+	<th align="left" colspan="10">Description</th>
+	<th align="right" colspan="5">Start Date</th>
+	<th align="right" colspan="5">End Date</th>
+    <th align="right" colspan="4">Quantity</th>
+    <th align="right" colspan="4">Rate</th>
+    <th align="right" colspan="5">Total</th>
+	</tr>
+</thead>
+</#if><tr style='font-size: 7pt'>
+	<!-- <td colspan="9">${record.entity.companyname}</td> -->
+	<!--<td colspan="11">
+
+		${item.custcol_itemhierarchy}
+        item(${item.custcol_sr_itemid})<br/>
+        itemid(${item.item.itemid})<br/>
+
+      
+      <#if item.custcol_itemhierarchy?has_content>
+        <#list item.custcol_itemhierarchy?split(":") as itemx>
+            <#list 0 ..< itemx_index as num>
+                &nbsp;&nbsp;&nbsp;
+            </#list>
+            ${itemx}<br/>
+        </#list>
+      <#else>
+        ${item.item}
+      </#if>
+    
+    </td>-->
+	<td vertical-align="bottom" align="left" colspan="10">${item.description}</td>
+	<td vertical-align="bottom" align="right" colspan="5">${item.custcol_agency_mf_flight_start_date}</td>
+	<td vertical-align="bottom" align="right" colspan="5">${item.custcol_agency_mf_flight_end_date}</td>
+    <td vertical-align="bottom" align="right" colspan="4">${item.quantity}</td>
+    <td vertical-align="bottom" align="right" colspan="4">${item.rate}</td>
+    <td vertical-align="bottom" align="right" colspan="5">${item.amount}</td>
+	</tr>
+	</#list><!-- end items --></table>
+
+<hr /></#if>
+
+  
+<table class="total" style="width: 100%; margin-top: 10px;">
+	<tr class="totalrow">
+        <td colspan="4">&nbsp;</td>
+        <td class='totalbox' align="right"><b>${record.total@label}</b>&nbsp;&nbsp;&nbsp;&nbsp;${record.total}</td>
+	</tr></table>
+
+<!--<table style='width:550px; padding-top:25px; bottom:50px;'>
+    <tr>
+        <td colspan='5'>
+        <table class='clientinfo box' style="width:250px">
+            <tr><th>Electronic Remittance Information</th></tr>
+            <tr><td>Recipient - DMS Digital Agency </td></tr>
+            <tr><td>Account Number - 4464585561</td></tr>
+            <tr><td>Recipient Bank - Wells Fargo Bank </td></tr>
+            <tr><td>Wire/ACH RTA: 121000248</td></tr>
+            <tr><td>Swift Code: WFBIUS6S</td></tr>
+        </table>
+        </td>
+      	<td colspan='5'>
+            <table class='clientinfo box' style="width:250px; margin-left:10px">
+                <tr><th>Check Remittance Information</th></tr>
+                <tr><td>Remit To: ${companyInformation.companyName}</td></tr>
+                <tr><td>${companyInformation.addressText}</td></tr>
+            </table>
+        </td>
+   	</tr>
+</table>-->
+</body>
+</pdf>

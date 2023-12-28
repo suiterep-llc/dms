@@ -1,0 +1,25 @@
+<suitelet scriptid="customscript_sr_sut_emailcreditmemo">
+  <description>Suitelet to handle sending Credit Memo Email with email template and pdf attached.</description>
+  <isinactive>F</isinactive>
+  <name>Email Credit Memo - SUT</name>
+  <notifyadmins>F</notifyadmins>
+  <notifyemails></notifyemails>
+  <notifyowner>T</notifyowner>
+  <notifyuser>F</notifyuser>
+  <scriptfile>[/SuiteScripts/sr_sut_emailcreditmemo_sendemail.js]</scriptfile>
+  <scriptdeployments>
+    <scriptdeployment scriptid="customdeploy_sr_sut_emailcreditmemo">
+      <allemployees>F</allemployees>
+      <allpartners>F</allpartners>
+      <allroles>T</allroles>
+      <audslctrole></audslctrole>
+      <eventtype></eventtype>
+      <isdeployed>T</isdeployed>
+      <isonline>F</isonline>
+      <loglevel>DEBUG</loglevel>
+      <runasrole></runasrole>
+      <status>RELEASED</status>
+      <title>Email Credit Memo</title>
+    </scriptdeployment>
+  </scriptdeployments>
+</suitelet>

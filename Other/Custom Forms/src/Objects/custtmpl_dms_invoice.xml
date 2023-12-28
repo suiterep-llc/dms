@@ -1,0 +1,7 @@
+<advancedpdftemplate scriptid="custtmpl_dms_invoice" standard="STDTMPLCUSTINVC">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <title>DMS Invoice Template</title>
+</advancedpdftemplate>

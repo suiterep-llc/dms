@@ -1,0 +1,7 @@
+<advancedpdftemplate scriptid="custtmpl_dms_creditmemo" standard="STDTMPLCUSTCRED">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <title>DMS Credit Memo Template</title>
+</advancedpdftemplate>
