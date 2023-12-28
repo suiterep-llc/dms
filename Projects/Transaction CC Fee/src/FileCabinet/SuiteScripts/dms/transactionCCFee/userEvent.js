@@ -32,12 +32,16 @@ define(['./commonLibrary', 'N/record'], function (library, record) {
 
     const convenienceFeePaymentId = createConvenienceFeePayment(invoiceId, newRecord);
     log.debug('created CC Fee payment', convenienceFeePaymentId);
+
+    record.submitFields({ ...newRecord, values: { custbody_dms_relatedccfeerecord: invoiceId } });
   }
 
 
   function createConvenienceFeePayment(invoiceId, newRecord) {
     const paymentRecord = record.transform({ fromType: 'invoice', toType: 'customerpayment', fromId: invoiceId });
     paymentRecord.setValue({ fieldId: 'paymentoption', value: newRecord.getValue('paymentoption') });
+    paymentRecord.setValue({ fieldId: 'custbody_dms_relatedccfeerecord', value: newRecord.id });
+
     return paymentRecord.save();
   }
 
@@ -51,6 +55,8 @@ define(['./commonLibrary', 'N/record'], function (library, record) {
         entity: Number(newRecord.getValue('customer'))
       }
     });
+
+    recordObject.setValue({ fieldId: 'custbody_dms_relatedccfeerecord', value: newRecord.id });
     const paymentTotalAmount = newRecord.getValue('total');
     const sublistId = 'item';
 
