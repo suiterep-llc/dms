@@ -5,11 +5,12 @@
  * @author Stephen Lemp (SuiteRep)
  */
 define(['./commonLibrary', 'N/record'], function (library, record) {
-  const FEE_PERCENTAGE = .025;
 
+  const FEE_PERCENTAGE = .025;
   const CC_FEE_ITEM = 1408;
+  const DMS_CC_FEE_INVOICE_FORM_ID = 214;
   const FIELDS_TO_COPY = ['entity', 'department'];
-  const ITEM_SUBLIST_FIELDS_TO_COPY = ['custcol_atlas_flightstart_d', 'custcol_agency_mf_flight_end_date', 'custcol_atlas_flightend_d', 'custcol_agency_mf_flight_start_date'];
+
   /**
    *
    * @param {Object} context
@@ -28,9 +29,9 @@ define(['./commonLibrary', 'N/record'], function (library, record) {
 
     const invoiceId = createConvenienceFeeInvoice(newRecord);
     log.debug('created CC Fee invoice', invoiceId);
+
     const convenienceFeePaymentId = createConvenienceFeePayment(invoiceId, newRecord);
     log.debug('created CC Fee payment', convenienceFeePaymentId);
-
   }
 
 
@@ -42,24 +43,20 @@ define(['./commonLibrary', 'N/record'], function (library, record) {
 
 
   function createConvenienceFeeInvoice(newRecord) {
-    const recordObject = record.create({ type: record.Type.INVOICE, defaultValues: { customform: 99 } });
+    log.debug('customer', newRecord.getValue('customer'));
+    const recordObject = record.create({
+      type: record.Type.INVOICE,
+      defaultValues: {
+        customform: DMS_CC_FEE_INVOICE_FORM_ID,
+        entity: Number(newRecord.getValue('customer'))
+      }
+    });
     const paymentTotalAmount = newRecord.getValue('total');
     const sublistId = 'item';
 
-    for (const fieldId of FIELDS_TO_COPY) {
-      recordObject.setValue({ fieldId, value: newRecord.getValue({ fieldId }) });
-    }
-
-    console.log('setting amount', paymentTotalAmount * FEE_PERCENTAGE);
-    recordObject.setSublistValue({ line: 0, fieldId: 'item', sublistId, value: 1408 });
+    recordObject.setSublistValue({ line: 0, fieldId: 'item', sublistId, value: CC_FEE_ITEM });
     recordObject.setSublistValue({ line: 0, fieldId: 'amount', sublistId, value: paymentTotalAmount * FEE_PERCENTAGE });
 
-
-    for (const fieldId of ITEM_SUBLIST_FIELDS_TO_COPY) {
-      const value = newRecord.getSublistValue({ sublistId, fieldId, line: 0 });
-      console.log('setting value of fieldId', { fieldId, value });
-      if (value) recordObject.setSublistValue({ line: 0, fieldId, sublistId, value });
-    }
     return recordObject.save({ ignoreMandatoryFields: true });
   }
 
